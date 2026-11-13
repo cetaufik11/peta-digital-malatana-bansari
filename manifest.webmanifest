@@ -1,0 +1,17 @@
+{
+  "name": "WebGIS Pro Dusun Malatana — Desa Bansari",
+  "short_name": "Peta Malatan",
+  "description": "Peta digital 2D/3D, mesin waktu citra satelit 2014-2026, batas dusun & Desa Bansari, analisis spasial, dan arsip sejarah Dusun Malatan.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b1120",
+  "theme_color": "#10b981",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
