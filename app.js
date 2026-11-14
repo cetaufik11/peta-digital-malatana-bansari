@@ -1557,19 +1557,80 @@
 
   const STORY_CHAPTERS = [
     {
-      id: "sejarah",
-      title: "1. Identitas & Geografi Dusun Malatan",
-      text: "Dusun Malatan berada di Desa Bansari, Kecamatan Bansari, Kabupaten Temanggung, pada ketinggian sekitar 1.310 hingga 1.338 meter di atas permukaan laut di lereng Gunung Sindoro. Permukiman warga tertata mengikuti kontur punggungan yang dikelilingi terasering pertanian."
+      id: "asal-usul",
+      title: "1. Asal-Usul, Posisi & Lanskap Lereng Sindoro",
+      text: "Dusun Malatan merupakan salah satu dukuh bersejarah di Desa Bansari, Kecamatan Bansari, Kabupaten Temanggung. Terletak di ketinggian sekitar 1.310 hingga 1.338 meter di atas permukaan laut pada punggungan lereng timur Gunung Sindoro, permukiman warga RT dan RW 09 tumbuh mengikuti kontur alami perbukitan yang dikelilingi terasering pertanian."
+    },
+    {
+      id: "tradisi",
+      title: "2. Jejak Leluhur, Sedekah Bumi & Budaya Agraris",
+      text: "Sejak era pembentukan wilayah dukuh, masyarakat Malatan menjaga tradisi leluhur seperti Sedekah Bumi dan gotong royong bersih dusun sebagai wujud syukur atas kesuburan tanah dan kelestarian mata air sendang. Nilai kebersamaan ini terus diwariskan melalui kegiatan warga di Balai Dusun maupun Gedung Kesenian Malatan."
     },
     {
       id: "harmoni",
-      title: "2. Koridor Bina Damai Lintas Iman",
-      text: "Salah satu keistimewaan Dusun Malatan adalah berdekatannya Masjid Jami' Al-Muqorobbin dan GKJ Sindoro Pepanthan Malatan yang hanya berjarak sekitar 194 meter. Keduanya menjadi simpul kerukunan dan gotong royong warga lintas generasi."
+      title: "3. Sejarah Kerukunan & Koridor Bina Damai Lintas Iman",
+      text: "Salah satu warisan sosial terpenting Dusun Malatan adalah harmoni kehidupan beragama yang telah teruji lintas generasi. Masjid Jami' Al-Muqorobbin dan GKJ Sindoro Pepanthan Malatan berdiri berdekatan sekitar 194 meter di poros dusun. Praktik bina damai ini bahkan terdokumentasi dalam penelitian akademik UIN Sunan Kalijaga Yogyakarta tahun 2022."
+    },
+    {
+      id: "pembangunan",
+      title: "4. Dinamika Pembangunan & Ruang Publik Dusun (2019–2026)",
+      text: "Dalam perkembangan modernnya, Dusun Malatan aktif menjadi pusat musyawarah warga, termasuk menjadi tuan rumah Musrenbang Kecamatan Bansari pada 2019, pelaksanaan peningkatan jalan lingkungan seperti pavingisasi RT 01 RW 09 pada 2023, hingga digitalisasi arsip dan peta geospasial 2D dan 3D."
     },
     {
       id: "ekonomi",
-      title: "3. Tembakau, Budaya & Wisata Sindoro",
-      text: "Warga Dusun Malatan dikenal sebagai pengolah tembakau rajangan berkualitas tinggi lereng Sindoro, penggerak wisata pendakian, sekaligus pelestari seni tradisional seperti Jaran Kepang dan Topeng Ireng di Gedung Kesenian Malatan."
+      title: "5. Tembakau Lereng Sindoro, Seni Rakyat & Wisata",
+      text: "Dari sisi ekonomi dan budaya, Dusun Malatan bertumpu pada budidaya serta pengolahan tembakau rajangan khas Temanggung, sayuran dataran tinggi, usaha perlengkapan pendakian Gunung Sindoro, serta pelestarian kesenian tradisional Jaran Kepang dan Topeng Ireng."
+    }
+  ];
+
+  const HISTORY_TIMELINE = [
+    {
+      year: "Era Pembentukan Dukuh (±1965)",
+      title: "Penetapan Permukiman & Batas Dukuh Malatan",
+      desc: "Penataan awal blok permukiman warga di punggungan lereng Sindoro beserta pemanfaatan sendang mata air dan lahan terasering utara-selatan."
+    },
+    {
+      year: "Warisan Lintas Generasi",
+      title: "Tradisi Sedekah Bumi & Seni Kesenian Rakyat",
+      desc: "Pelestarian ritual syukur panen, gotong royong pembangunan dusun, serta latihan seni Jaran Kepang dan Topeng Ireng di Gedung Kesenian Malatan."
+    },
+    {
+      year: "2019",
+      title: "Balai Dusun Malatan Tuan Rumah Musrenbang Kecamatan",
+      desc: "Tercatat dalam dokumentasi resmi Pemerintah Provinsi Jawa Tengah sebagai lokasi penyelenggaraan Musrenbang Kecamatan Bansari."
+    },
+    {
+      year: "2022",
+      title: "Riset Akademik Kerukunan Umat Beragama Dusun Malatan",
+      desc: "Tesis UIN Sunan Kalijaga Yogyakarta mendokumentasikan praktik nyata bina damai warga Muslim dan Kristiani di sekitar Masjid Al-Muqorobbin dan GKJ Sindoro."
+    },
+    {
+      year: "2023 – 2026",
+      title: "Pavingisasi RT 01/RW 09 & Digitalisasi Peta 3D/WebGIS",
+      desc: "Peningkatan akses jalan lingkungan (Renja DPUPR Kab. Temanggung 2023) hingga pemetaan geospasial modern 2D/3D dan arsip digital Dusun Malatan."
+    }
+  ];
+
+  const HISTORY_SOURCES = [
+    {
+      title: "Kerukunan Antar Umat Beragama di Dusun Malatan (2022)",
+      inst: "Tesis UIN Sunan Kalijaga Yogyakarta",
+      url: "https://digilib.uin-suka.ac.id/id/eprint/56593/"
+    },
+    {
+      title: "Musrenbang Kecamatan Bansari di Balai Dusun Malatan (2019)",
+      inst: "Pemerintah Provinsi Jawa Tengah",
+      url: "https://jatengprov.go.id/beritadaerah/musrenbang-2019-demi-terwujudnya-temanggung-tentrem-marem-gandem/"
+    },
+    {
+      title: "Rencana Kerja DPUPR Kab. Temanggung — Pavingisasi RT 01/RW 09 Malatan (2023)",
+      inst: "PPID Kabupaten Temanggung",
+      url: "https://ppid.temanggungkab.go.id/assets/dok_file/RENJA_DPUPR_Tahun_2023.pdf"
+    },
+    {
+      title: "Kecamatan Bansari Dalam Angka 2025",
+      inst: "BPS Kabupaten Temanggung",
+      url: "https://temanggungkab.bps.go.id/id/publication/2025/09/26/2561385b26246d8a079b4338/bansari-district-in-figures-2025.html"
     }
   ];
 
@@ -1653,6 +1714,30 @@
           if (ch) playStoryVoice(ch.text);
         });
       });
+    } else if (tabName === "timeline") {
+      archiveContent.innerHTML = `
+        <div class="timeline-list">
+          ${HISTORY_TIMELINE.map((t) => `
+            <div class="timeline-item">
+              <div class="timeline-year">${escapeHtml(t.year)}</div>
+              <h5>${escapeHtml(t.title)}</h5>
+              <p>${escapeHtml(t.desc)}</p>
+            </div>
+          `).join("")}
+        </div>
+        <div style="font-size:12px;font-weight:700;color:#6ee7b7;margin-bottom:8px;">📚 Sumber Rujukan Resmi</div>
+        <div class="source-link-list">
+          ${HISTORY_SOURCES.map((s) => `
+            <a class="source-link-card" href="${s.url}" target="_blank" rel="noopener noreferrer">
+              <div>
+                <strong>${escapeHtml(s.title)}</strong>
+                <small>${escapeHtml(s.inst)}</small>
+              </div>
+              <span>↗</span>
+            </a>
+          `).join("")}
+        </div>
+      `;
     } else if (tabName === "legend") {
       const neighbors = (DATA.neighborBoundaries || []).map(
         (d) => `<div class="legend-item"><span class="legend-box" style="background:${d.color};opacity:0.75"></span><span>${escapeHtml(d.name)}</span></div>`
