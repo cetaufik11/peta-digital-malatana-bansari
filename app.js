@@ -1552,34 +1552,40 @@
   const archiveContent = document.getElementById("archiveContent");
   const btnArchiveGuide = document.getElementById("btnArchiveGuide");
   const btnCloseArchive = document.getElementById("btnCloseArchive");
-  const BOT_VOICE_KEY = "malatan_datanusantarabot_voice_url";
+  const BOT_VOICE_KEY = "malatan_datanusantarabot_voice_id";
   let activeAudio = null;
+  let selectedVoice = localStorage.getItem(BOT_VOICE_KEY) || "ardi";
 
   const STORY_CHAPTERS = [
     {
       id: "asal-usul",
+      audioKey: "bab1",
       title: "1. Asal-Usul, Posisi & Lanskap Lereng Sindoro",
       text: "Dusun Malatan merupakan salah satu dukuh bersejarah di Desa Bansari, Kecamatan Bansari, Kabupaten Temanggung. Terletak di ketinggian sekitar 1.310 hingga 1.338 meter di atas permukaan laut pada punggungan lereng timur Gunung Sindoro, permukiman warga RT dan RW 09 tumbuh mengikuti kontur alami perbukitan yang dikelilingi terasering pertanian."
     },
     {
       id: "tradisi",
+      audioKey: "bab2",
       title: "2. Jejak Leluhur, Sedekah Bumi & Budaya Agraris",
-      text: "Sejak era pembentukan wilayah dukuh, masyarakat Malatan menjaga tradisi leluhur seperti Sedekah Bumi dan gotong royong bersih dusun sebagai wujud syukur atas kesuburan tanah dan kelestarian mata air sendang. Nilai kebersamaan ini terus diwariskan melalui kegiatan warga di Balai Dusun maupun Gedung Kesenian Malatan."
+      text: "Sejak masa pembukaan lahan oleh para cikal bakal dukuh, masyarakat Malatan merawat hubungan erat dengan alam lereng Sindoro. Sumber mata air sendang di lembah utara menjadi penopang kehidupan warga, sementara tradisi tahunan Sedekah Bumi dan bersih dusun terus dijaga sebagai ungkapan syukur atas kesuburan tanah dan kerukunan antarwarga."
     },
     {
       id: "harmoni",
+      audioKey: "bab3",
       title: "3. Sejarah Kerukunan & Koridor Bina Damai Lintas Iman",
-      text: "Salah satu warisan sosial terpenting Dusun Malatan adalah harmoni kehidupan beragama yang telah teruji lintas generasi. Masjid Jami' Al-Muqorobbin dan GKJ Sindoro Pepanthan Malatan berdiri berdekatan sekitar 194 meter di poros dusun. Praktik bina damai ini bahkan terdokumentasi dalam penelitian akademik UIN Sunan Kalijaga Yogyakarta tahun 2022."
+      text: "Warisan sosial paling menonjol di Dusun Malatan adalah harmoni lintas iman yang terjalin lintas generasi. Masjid Jami' Al-Muqorobbin dan GKJ Sindoro Pepanthan Malatan berdiri berdekatan sekitar 194 meter di poros utama dusun. Praktik bina damai ini telah didokumentasikan dalam penelitian akademik UIN Sunan Kalijaga Yogyakarta tahun 2022."
     },
     {
       id: "pembangunan",
-      title: "4. Dinamika Pembangunan & Ruang Publik Dusun (2019–2026)",
-      text: "Dalam perkembangan modernnya, Dusun Malatan aktif menjadi pusat musyawarah warga, termasuk menjadi tuan rumah Musrenbang Kecamatan Bansari pada 2019, pelaksanaan peningkatan jalan lingkungan seperti pavingisasi RT 01 RW 09 pada 2023, hingga digitalisasi arsip dan peta geospasial 2D dan 3D."
+      audioKey: "bab4",
+      title: "4. Dinamika Pembangunan & Ruang Publik Dusun (1965–2026)",
+      text: "Dalam perjalanan pembangunannya sejak era penetapan wilayah dukuh sekitar tahun 1965, Dusun Malatan terus berkembang sebagai pusat musyawarah warga. Pada 2019, Balai Dusun Malatan menjadi tuan rumah Musrenbang Kecamatan Bansari, disusul peningkatan jalan lingkungan RT 01/RW 09 pada 2023 hingga digitalisasi peta geospasial 3D pada 2026."
     },
     {
       id: "ekonomi",
+      audioKey: "bab5",
       title: "5. Tembakau Lereng Sindoro, Seni Rakyat & Wisata",
-      text: "Dari sisi ekonomi dan budaya, Dusun Malatan bertumpu pada budidaya serta pengolahan tembakau rajangan khas Temanggung, sayuran dataran tinggi, usaha perlengkapan pendakian Gunung Sindoro, serta pelestarian kesenian tradisional Jaran Kepang dan Topeng Ireng."
+      text: "Tanah vulkanik subur di ketinggian lebih dari 1.300 meter menjadikan Dusun Malatan salah satu sentra tembakau rajangan khas Temanggung dan hortikultura dataran tinggi. Di saat yang sama, generasi mudanya menggerakkan ekonomi wisata pendakian Gunung Sindoro serta melestarikan seni tradisional Jaran Kepang dan Topeng Ireng di Gedung Kesenian Malatan."
     }
   ];
 
@@ -1644,22 +1650,16 @@
     }
   }
 
-  function playStoryVoice(text) {
+  function playStoryVoice(ch) {
     stopStoryVoice();
-    const customUrl = (localStorage.getItem(BOT_VOICE_KEY) || "").trim();
-    if (customUrl) {
-      const targetUrl = customUrl.includes("{text}")
-        ? customUrl.replace("{text}", encodeURIComponent(text))
-        : customUrl;
-      activeAudio = new Audio(targetUrl);
-      activeAudio.play().catch(() => {
-        showToast("Gagal memutar URL datanusantarabot, beralih ke suara browser");
-        speakBrowserId(text);
-      });
-      showToast("Memutar suara datanusantarabot...");
-      return;
-    }
-    speakBrowserId(text);
+    const audioPath = `./audio/${selectedVoice}-${ch.audioKey}.mp3`;
+    activeAudio = new Audio(audioPath);
+    activeAudio.play().catch(() => {
+      showToast("Audio studio gagal dimuat, beralih ke suara browser");
+      speakBrowserId(ch.text);
+    });
+    const label = selectedVoice === "ardi" ? "Ardi Studio (id-ID-ArdiNeural)" : "Gadis Studio (id-ID-GadisNeural)";
+    showToast(`Memutar ${ch.title.split(".")[0]}. ${label}`);
   }
 
   function speakBrowserId(text) {
@@ -1674,35 +1674,36 @@
     const idVoice = voices.find((v) => v.lang.toLowerCase().includes("id"));
     if (idVoice) utter.voice = idVoice;
     window.speechSynthesis.speak(utter);
-    showToast("Memutar narasi suara Indonesia (isi URL datanusantarabot untuk suara bot)");
   }
 
   function renderArchiveTab(tabName) {
     if (tabName === "story") {
-      const savedUrl = escapeHtml(localStorage.getItem(BOT_VOICE_KEY) || "");
       archiveContent.innerHTML = `
         <div class="story-voice-bar">
-          <div style="font-size:12px;font-weight:700;color:#6ee7b7;">🎙️ Konfigurasi Suara Bot (datanusantarabot)</div>
+          <div style="font-size:12px;font-weight:700;color:#6ee7b7;">🎙️ Voice Studio (Mesin Suara datanusantarabot · edge-tts + FFmpeg Mastering)</div>
           <div class="story-voice-row">
-            <input type="text" id="botVoiceInput" value="${savedUrl}" placeholder="URL Audio / Endpoint datanusantarabot (opsional, dukung {text})" />
-            <button class="m-btn" id="btnSaveBotVoice">Simpan Suara</button>
-            <button class="m-btn m-btn-close" id="btnStopVoice">⏹ Stop</button>
+            <button class="tab-btn ${selectedVoice === "ardi" ? "active" : ""}" data-voice="ardi">👨 Ardi Studio (Pria Dokumenter)</button>
+            <button class="tab-btn ${selectedVoice === "gadis" ? "active" : ""}" data-voice="gadis">👩 Gadis Studio (Wanita Natural)</button>
+            <button class="m-btn m-btn-close" id="btnStopVoice" style="margin-left:auto">⏹ Stop Suara</button>
           </div>
-          <div style="font-size:11px;color:var(--text-muted);">Jika dikosongkan, pemutar otomatis memakai suara Bahasa Indonesia bawaan browser sebagai cadangan.</div>
+          <div style="font-size:11px;color:var(--text-muted);">Audio narasi dimastering langsung dengan <code>id-ID-ArdiNeural</code> / <code>id-ID-GadisNeural</code> &amp; filter studio (-16 LUFS).</div>
         </div>
         ${STORY_CHAPTERS.map((ch) => `
           <div class="story-card">
             <h4>${escapeHtml(ch.title)}</h4>
             <p>${escapeHtml(ch.text)}</p>
-            <button class="btn-secondary btn-play-story" data-story-id="${ch.id}">🔊 Putar Narasi</button>
+            <button class="btn-secondary btn-play-story" data-story-id="${ch.id}">🔊 Putar Narasi (${selectedVoice === "ardi" ? "Ardi" : "Gadis"})</button>
           </div>
         `).join("")}
       `;
 
-      document.getElementById("btnSaveBotVoice").addEventListener("click", () => {
-        const val = document.getElementById("botVoiceInput").value.trim();
-        localStorage.setItem(BOT_VOICE_KEY, val);
-        showToast(val ? "Sumber suara datanusantarabot disimpan" : "Kembali ke suara bawaan browser");
+      archiveContent.querySelectorAll("[data-voice]").forEach((vbtn) => {
+        vbtn.addEventListener("click", () => {
+          selectedVoice = vbtn.dataset.voice;
+          localStorage.setItem(BOT_VOICE_KEY, selectedVoice);
+          renderArchiveTab("story");
+          showToast(`Karakter suara: ${selectedVoice === "ardi" ? "Ardi Studio" : "Gadis Studio"}`);
+        });
       });
       document.getElementById("btnStopVoice").addEventListener("click", () => {
         stopStoryVoice();
@@ -1711,7 +1712,7 @@
       archiveContent.querySelectorAll(".btn-play-story").forEach((b) => {
         b.addEventListener("click", () => {
           const ch = STORY_CHAPTERS.find((c) => c.id === b.dataset.storyId);
-          if (ch) playStoryVoice(ch.text);
+          if (ch) playStoryVoice(ch);
         });
       });
     } else if (tabName === "timeline") {
